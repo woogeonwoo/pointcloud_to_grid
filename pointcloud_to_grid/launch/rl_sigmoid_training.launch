@@ -1,0 +1,12 @@
+<launch>
+    <!-- 기존 pointcloud_to_grid 노드 -->
+    <node name="pointcloud_to_grid" pkg="pointcloud_to_grid" type="pointcloud_to_grid_node" output="screen"/>
+    
+    <!-- RL inference 서버 -->
+    <node name="rl_sigmoid_server" pkg="pointcloud_to_grid" type="rl_inference_server.py" output="screen">
+        <param name="model_path" value="$(find pointcloud_to_grid)/models/trained_sigmoid_model.zip"/>
+    </node>
+    
+    <!-- RL 최적화 노드 -->
+    <node name="rl_sigmoid_optimizer" pkg="pointcloud_to_grid" type="rl_sigmoid_optimizer" output="screen"/>
+</launch>
